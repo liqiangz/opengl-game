@@ -9,6 +9,7 @@
 
 #include "resourceManager.h"
 #include "component/spriteRenderer.h"
+#include "component/gameLevel.h"
 
 
 
@@ -23,20 +24,24 @@ class Game
 public:
 
     // 游戏状态
+    std::vector<GameLevel> levels;
     gameState              state;
+    GLuint                 deathNumber;
+    GLuint                 fps;
     GLuint                 level;
     GLboolean              keys[1024];
     GLuint                 width, height;
-    // Constructor/Destructor
+
     Game(GLuint width, GLuint height);
     ~Game();
     // 初始化 - 加载纹理、着色器等
     void init();
+    void reset();
     void processInput(GLfloat dt);
     void update(GLfloat dt);
     void render();
 private:
-    //void DoCollisions();
+    void doCollisions();
 
 };
 

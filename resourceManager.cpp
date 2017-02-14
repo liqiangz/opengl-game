@@ -10,29 +10,34 @@
 std::map<std::string, Texture2D>    ResourceManager::textures;
 std::map<std::string, Shader>       ResourceManager::shaders;
 
-
+//加载 shader
 Shader ResourceManager::loadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
     shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
     return shaders[name];
+
 }
 
+//获取指定的 shader
 Shader ResourceManager::getShader(std::string name)
 {
     return shaders[name];
 }
 
+//加载 texture
 Texture2D ResourceManager::loadTexture(const GLchar *file, GLboolean alpha, std::string name)
 {
     textures[name] = loadTextureFromFile(file, alpha);
     return textures[name];
 }
 
+//获取指定的 texture
 Texture2D ResourceManager::getTexture(std::string name)
 {
     return textures[name];
 }
 
+//清理
 void ResourceManager::clear()
 {
 
@@ -80,6 +85,7 @@ Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLch
     const GLchar *vShaderCode = vertexCode.c_str();
     const GLchar *fShaderCode = fragmentCode.c_str();
     const GLchar *gShaderCode = geometryCode.c_str();
+    // 生成 shader 对象
     Shader shader;
     shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
     return shader;
